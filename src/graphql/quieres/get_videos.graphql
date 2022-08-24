@@ -1,0 +1,6 @@
+query GetVideos {
+  videos {
+    id
+    videoId
+  }
+}
