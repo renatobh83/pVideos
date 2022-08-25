@@ -49,7 +49,7 @@ export function Sidebar() {
             className={classNames(
               "p-3 text-g1 rounded border-g9 border hover:bg-g1 hover:text-g9 text-center",
               {
-                "bg-g9  hover:text-black": video.id === slug,
+                "bg-g9 border-none hover:text-black": video.id === slug,
               }
             )}
           >
