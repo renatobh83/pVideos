@@ -2,5 +2,6 @@ query GetVideos {
   videos {
     id
     videoId
+    categoria
   }
 }

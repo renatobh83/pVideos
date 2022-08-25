@@ -661,6 +661,11 @@ export type BatchPayload = {
   count: Scalars['Long'];
 };
 
+export enum Categoria {
+  Infantil = 'infantil',
+  Ingles = 'ingles'
+}
+
 /** Representing a color value comprising of HEX, RGBA and css color values */
 export type Color = {
   __typename?: 'Color';
@@ -2854,6 +2859,7 @@ export type VersionWhereInput = {
 
 export type Video = Node & {
   __typename?: 'Video';
+  categoria?: Maybe<Categoria>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
@@ -2936,6 +2942,7 @@ export type VideoConnection = {
 };
 
 export type VideoCreateInput = {
+  categoria?: InputMaybe<Categoria>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   videoId?: InputMaybe<Scalars['String']>;
@@ -2974,6 +2981,13 @@ export type VideoManyWhereInput = {
   OR?: InputMaybe<Array<VideoWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  categoria?: InputMaybe<Categoria>;
+  /** All values that are contained in given list. */
+  categoria_in?: InputMaybe<Array<InputMaybe<Categoria>>>;
+  /** All values that are not equal to given value. */
+  categoria_not?: InputMaybe<Categoria>;
+  /** All values that are not contained in given list. */
+  categoria_not_in?: InputMaybe<Array<InputMaybe<Categoria>>>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3066,6 +3080,8 @@ export type VideoManyWhereInput = {
 };
 
 export enum VideoOrderByInput {
+  CategoriaAsc = 'categoria_ASC',
+  CategoriaDesc = 'categoria_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
   IdAsc = 'id_ASC',
@@ -3079,6 +3095,7 @@ export enum VideoOrderByInput {
 }
 
 export type VideoUpdateInput = {
+  categoria?: InputMaybe<Categoria>;
   videoId?: InputMaybe<Scalars['String']>;
 };
 
@@ -3100,6 +3117,7 @@ export type VideoUpdateManyInlineInput = {
 };
 
 export type VideoUpdateManyInput = {
+  categoria?: InputMaybe<Categoria>;
   videoId?: InputMaybe<Scalars['String']>;
 };
 
@@ -3156,6 +3174,13 @@ export type VideoWhereInput = {
   OR?: InputMaybe<Array<VideoWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
+  categoria?: InputMaybe<Categoria>;
+  /** All values that are contained in given list. */
+  categoria_in?: InputMaybe<Array<InputMaybe<Categoria>>>;
+  /** All values that are not equal to given value. */
+  categoria_not?: InputMaybe<Categoria>;
+  /** All values that are not contained in given list. */
+  categoria_not_in?: InputMaybe<Array<InputMaybe<Categoria>>>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3341,7 +3366,7 @@ export type GetByIdQuery = { __typename?: 'Query', video?: { __typename?: 'Video
 export type GetVideosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetVideosQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null }> };
+export type GetVideosQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null }> };
 
 
 export const GetByIdDocument = gql`
@@ -3384,6 +3409,7 @@ export const GetVideosDocument = gql`
   videos {
     id
     videoId
+    categoria
   }
 }
     `;

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "vite",
-    "build": "vite build --debug",
+    "build": "vite build",
     "preview": "vite preview",
     "codegen": "graphql-codegen"
   },
