@@ -6,7 +6,7 @@ import { useGetVideoCategoriaQuery } from "../graphql/types";
 export function Sidebar() {
   const { slug } = useParams<{ slug: string }>();
   const [cat, setCat] = useState();
-  console.log(slug);
+
   const { data } = useGetVideoCategoriaQuery({
     variables: {
       categoria: cat,
@@ -19,7 +19,7 @@ export function Sidebar() {
 
   return (
     <aside className="overflow-y-auto 800:h-full h-80 p-3 text-zinc-500 800:w-[348px] border-gray-600">
-      <ul className="flex gap-5 items-center ">
+      <ul className="flex gap-5 items-center  flex-wrap">
         <li>
           <button
             className={classNames("py-2 px-4 border rounded hover:text-g1", {
@@ -49,7 +49,7 @@ export function Sidebar() {
             className={classNames(
               "p-3 text-g1 rounded border-g9 border hover:bg-g1 hover:text-g9 text-center",
               {
-                "bg-slate-50 text-black hover:text-black": video.id === slug,
+                "bg-g9  hover:text-black": video.id === slug,
               }
             )}
           >
