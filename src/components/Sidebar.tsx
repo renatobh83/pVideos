@@ -3,20 +3,21 @@ import { useGetVideosQuery } from "../graphql/types";
 
 export function Sidebar() {
   const { data } = useGetVideosQuery();
+
   if (!data) {
     return <div>Carregando....</div>;
   }
 
   return (
     <aside className="overflow-y-auto 800:h-full h-80 p-3 text-zinc-500 800:w-[348px] border-gray-600">
-      <div className="800:pt-10 flex gap-7 flex-col px-2 800:px-5 800:py-2 py-4 800:max-h-[60vh]">
-        {data.videos.map((video: { id: string; videoId: string }) => (
+      <div className="800:pt-10  gap-7 px-2 800:px-5 800:py-2 py-4 800:max-h-[60vh] grid grid-cols-2">
+        {data.videos.map((video: { id: string }, index: number) => (
           <Link
             key={video.id}
             to={`/video/${video.id}`}
-            className="p-3 rounded  border-g9 border hover:bg-g1 hover:text-g9"
+            className="p-3 rounded border-g9 border hover:bg-g1 hover:text-g9 text-center"
           >
-            Video 1
+            {index + 1}
           </Link>
         ))}
       </div>
