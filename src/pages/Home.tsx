@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 export function Home() {
   const { slug } = useParams<{ slug: string }>();
+  console.log(slug);
   return (
     <div className="flex flex-col min-h-screen w-screen max-w-[1160px] mx-auto ">
       <Header />
@@ -12,7 +13,7 @@ export function Home() {
         {slug ? (
           <Video videoSlug={slug} />
         ) : (
-          <div className="flex-1">Carregando....</div>
+          <div className="flex-1 text-zinc-50"></div>
         )}
         <Sidebar />
       </main>
