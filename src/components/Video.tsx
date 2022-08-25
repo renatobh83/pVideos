@@ -13,11 +13,11 @@ export function Video({ videoSlug }: VideoProps) {
   });
 
   if (!data) {
-    return <div>Carregando...</div>;
+    return <div></div>;
   }
-
+  console.log(data);
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="800:flex-1 overflow-y-auto">
       <div className="bg-black flex justify-center p-5">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           <Player debug={true}>

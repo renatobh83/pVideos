@@ -11,7 +11,7 @@ export function Sidebar() {
     },
   });
 
-  const handleChooseList = (cat) => {
+  const handleChooseList = (cat: any) => {
     setCat(cat);
   };
 
