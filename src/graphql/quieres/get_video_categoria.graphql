@@ -1,0 +1,7 @@
+query getVideoCategoria($categoria: Categoria) {
+  videos(where: { categoria: $categoria }) {
+    id
+    videoId
+    categoria
+  }
+}
