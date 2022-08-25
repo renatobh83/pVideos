@@ -15,10 +15,9 @@ export function Video({ videoSlug }: VideoProps) {
   if (!data) {
     return <div></div>;
   }
-  console.log(data);
   return (
     <div className="800:flex-1 overflow-y-auto">
-      <div className="bg-black flex justify-center p-5">
+      <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           <Player debug={true}>
             <Youtube videoId={data.video.videoId} />
