@@ -1,0 +1,5 @@
+mutation publish($id: ID!) {
+  publishVideo(where: { id: $id }) {
+    id
+  }
+}

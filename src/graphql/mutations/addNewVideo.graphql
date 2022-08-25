@@ -1,0 +1,5 @@
+mutation addVideo($categoria: Categoria!, $videoId: String!) {
+  createVideo(data: { categoria: $categoria, videoId: $videoId }) {
+    id
+  }
+}

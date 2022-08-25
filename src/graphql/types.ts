@@ -3356,6 +3356,21 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type AddVideoMutationVariables = Exact<{
+  categoria: Categoria;
+  videoId: Scalars['String'];
+}>;
+
+
+export type AddVideoMutation = { __typename?: 'Mutation', createVideo?: { __typename?: 'Video', id: string } | null };
+
+export type PublishMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type PublishMutation = { __typename?: 'Mutation', publishVideo?: { __typename?: 'Video', id: string } | null };
+
 export type GetByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -3376,6 +3391,73 @@ export type GetVideosQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetVideosQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null }> };
 
 
+export const AddVideoDocument = gql`
+    mutation addVideo($categoria: Categoria!, $videoId: String!) {
+  createVideo(data: {categoria: $categoria, videoId: $videoId}) {
+    id
+  }
+}
+    `;
+export type AddVideoMutationFn = Apollo.MutationFunction<AddVideoMutation, AddVideoMutationVariables>;
+
+/**
+ * __useAddVideoMutation__
+ *
+ * To run a mutation, you first call `useAddVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addVideoMutation, { data, loading, error }] = useAddVideoMutation({
+ *   variables: {
+ *      categoria: // value for 'categoria'
+ *      videoId: // value for 'videoId'
+ *   },
+ * });
+ */
+export function useAddVideoMutation(baseOptions?: Apollo.MutationHookOptions<AddVideoMutation, AddVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddVideoMutation, AddVideoMutationVariables>(AddVideoDocument, options);
+      }
+export type AddVideoMutationHookResult = ReturnType<typeof useAddVideoMutation>;
+export type AddVideoMutationResult = Apollo.MutationResult<AddVideoMutation>;
+export type AddVideoMutationOptions = Apollo.BaseMutationOptions<AddVideoMutation, AddVideoMutationVariables>;
+export const PublishDocument = gql`
+    mutation publish($id: ID!) {
+  publishVideo(where: {id: $id}) {
+    id
+  }
+}
+    `;
+export type PublishMutationFn = Apollo.MutationFunction<PublishMutation, PublishMutationVariables>;
+
+/**
+ * __usePublishMutation__
+ *
+ * To run a mutation, you first call `usePublishMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePublishMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [publishMutation, { data, loading, error }] = usePublishMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePublishMutation(baseOptions?: Apollo.MutationHookOptions<PublishMutation, PublishMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PublishMutation, PublishMutationVariables>(PublishDocument, options);
+      }
+export type PublishMutationHookResult = ReturnType<typeof usePublishMutation>;
+export type PublishMutationResult = Apollo.MutationResult<PublishMutation>;
+export type PublishMutationOptions = Apollo.BaseMutationOptions<PublishMutation, PublishMutationVariables>;
 export const GetByIdDocument = gql`
     query GetById($id: ID!) {
   video(where: {id: $id}) {
