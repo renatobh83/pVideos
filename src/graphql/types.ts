@@ -2877,6 +2877,8 @@ export type Video = Node & {
   scheduledIn: Array<ScheduledOperation>;
   /** System stage field */
   stage: Stage;
+  thumbnail?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
@@ -2944,6 +2946,8 @@ export type VideoConnection = {
 export type VideoCreateInput = {
   categoria?: InputMaybe<Categoria>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  thumbnail?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   videoId?: InputMaybe<Scalars['String']>;
 };
@@ -3042,6 +3046,44 @@ export type VideoManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  thumbnail?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  thumbnail_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  thumbnail_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  thumbnail_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  thumbnail_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  thumbnail_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  thumbnail_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  thumbnail_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  thumbnail_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  thumbnail_starts_with?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  title_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3088,6 +3130,10 @@ export enum VideoOrderByInput {
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
+  ThumbnailAsc = 'thumbnail_ASC',
+  ThumbnailDesc = 'thumbnail_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
   UpdatedAtDesc = 'updatedAt_DESC',
   VideoIdAsc = 'videoId_ASC',
@@ -3096,6 +3142,8 @@ export enum VideoOrderByInput {
 
 export type VideoUpdateInput = {
   categoria?: InputMaybe<Categoria>;
+  thumbnail?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
   videoId?: InputMaybe<Scalars['String']>;
 };
 
@@ -3118,6 +3166,8 @@ export type VideoUpdateManyInlineInput = {
 
 export type VideoUpdateManyInput = {
   categoria?: InputMaybe<Categoria>;
+  thumbnail?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
   videoId?: InputMaybe<Scalars['String']>;
 };
 
@@ -3235,6 +3285,44 @@ export type VideoWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  thumbnail?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  thumbnail_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  thumbnail_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  thumbnail_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  thumbnail_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  thumbnail_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  thumbnail_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  thumbnail_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  thumbnail_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  thumbnail_starts_with?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  title_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3359,6 +3447,8 @@ export enum _SystemDateTimeFieldVariation {
 export type AddVideoMutationVariables = Exact<{
   categoria: Categoria;
   videoId: Scalars['String'];
+  thumbnail: Scalars['String'];
+  title: Scalars['String'];
 }>;
 
 
@@ -3383,7 +3473,7 @@ export type GetVideoCategoriaQueryVariables = Exact<{
 }>;
 
 
-export type GetVideoCategoriaQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null }> };
+export type GetVideoCategoriaQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null, title?: string | null, thumbnail?: string | null }> };
 
 export type GetVideosQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3392,8 +3482,10 @@ export type GetVideosQuery = { __typename?: 'Query', videos: Array<{ __typename?
 
 
 export const AddVideoDocument = gql`
-    mutation addVideo($categoria: Categoria!, $videoId: String!) {
-  createVideo(data: {categoria: $categoria, videoId: $videoId}) {
+    mutation addVideo($categoria: Categoria!, $videoId: String!, $thumbnail: String!, $title: String!) {
+  createVideo(
+    data: {categoria: $categoria, videoId: $videoId, thumbnail: $thumbnail, title: $title}
+  ) {
     id
   }
 }
@@ -3415,6 +3507,8 @@ export type AddVideoMutationFn = Apollo.MutationFunction<AddVideoMutation, AddVi
  *   variables: {
  *      categoria: // value for 'categoria'
  *      videoId: // value for 'videoId'
+ *      thumbnail: // value for 'thumbnail'
+ *      title: // value for 'title'
  *   },
  * });
  */
@@ -3499,6 +3593,8 @@ export const GetVideoCategoriaDocument = gql`
     id
     videoId
     categoria
+    title
+    thumbnail
   }
 }
     `;

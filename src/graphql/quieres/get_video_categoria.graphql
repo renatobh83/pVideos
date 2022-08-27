@@ -3,5 +3,7 @@ query getVideoCategoria($categoria: Categoria) {
     id
     videoId
     categoria
+    title
+    thumbnail
   }
 }

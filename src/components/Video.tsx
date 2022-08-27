@@ -19,7 +19,7 @@ export function Video({ videoSlug }: VideoProps) {
     <div className="800:flex-1 overflow-y-auto">
       <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
-          <Player debug={true}>
+          <Player controls>
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
           </Player>

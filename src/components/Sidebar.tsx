@@ -19,7 +19,17 @@ export function Sidebar() {
 
   return (
     <aside className="overflow-y-auto 800:h-full h-80 p-3 text-zinc-500 800:w-[348px] border-gray-600">
-      <ul className="flex px-5 gap-5 items-center  flex-wrap">
+      <ul className="flex px-5 gap-2 items-center flex-wrap">
+        <li>
+          <button
+            className={classNames("py-2 px-4 border rounded hover:text-g1", {
+              "bg-slate-50 text-black hover:text-black": cat === "musicas",
+            })}
+            onClick={() => handleChooseList("musicas")}
+          >
+            Musicas
+          </button>
+        </li>
         <li>
           <button
             className={classNames("py-2 px-4 border rounded hover:text-g1", {
@@ -41,7 +51,7 @@ export function Sidebar() {
           </button>
         </li>
       </ul>
-      <div className="800:pt-10 uppercase tracking-wider gap-2 px-2 800:px-5 800:py-2 py-4 800:max-h-[60vh] grid grid-cols-2">
+      <div className="800:pt-10 gap-2 px-2 800:px-5 800:py-2 py-4 800:max-h-[60vh] grid grid-cols-1">
         {data?.videos.map((video) => (
           <Link
             key={video.id}
@@ -53,7 +63,10 @@ export function Sidebar() {
               }
             )}
           >
-            {video.categoria}
+            <div className="flex text-sm gap-2 ">
+              <img src={video.thumbnail} className="w-[48px] h-[48px]" />
+              <span className=""> {video.title.substring(0, 40)}</span>
+            </div>
           </Link>
         ))}
       </div>
