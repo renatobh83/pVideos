@@ -27,6 +27,9 @@ export function Header() {
   const handleNewVideo = () => {
     setNewVideo(!newVideo);
   };
+  const handleLogout = () => {
+    localStorage.clear();
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -129,7 +132,10 @@ export function Header() {
               add
             </span>
           </button>
-          <button className="place-self-end pr-3 flex items-center">
+          <button
+            onClick={handleLogout}
+            className="place-self-end pr-3 flex items-center"
+          >
             <a href="/">Sair</a>
           </button>
         </div>
