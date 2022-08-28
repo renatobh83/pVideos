@@ -1,0 +1,6 @@
+query listSubscribe {
+  subscribers {
+    email
+    id
+  }
+}

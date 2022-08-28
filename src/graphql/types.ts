@@ -663,7 +663,8 @@ export type BatchPayload = {
 
 export enum Categoria {
   Infantil = 'infantil',
-  Ingles = 'ingles'
+  Ingles = 'ingles',
+  Musicas = 'musicas'
 }
 
 /** Representing a color value comprising of HEX, RGBA and css color values */
@@ -816,6 +817,8 @@ export type Mutation = {
   createAsset?: Maybe<Asset>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Create one subscriber */
+  createSubscriber?: Maybe<Subscriber>;
   /** Create one video */
   createVideo?: Maybe<Video>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
@@ -828,6 +831,13 @@ export type Mutation = {
   /** Delete many Asset documents, return deleted documents */
   deleteManyAssetsConnection: AssetConnection;
   /**
+   * Delete many Subscriber documents
+   * @deprecated Please use the new paginated many mutation (deleteManySubscribersConnection)
+   */
+  deleteManySubscribers: BatchPayload;
+  /** Delete many Subscriber documents, return deleted documents */
+  deleteManySubscribersConnection: SubscriberConnection;
+  /**
    * Delete many Video documents
    * @deprecated Please use the new paginated many mutation (deleteManyVideosConnection)
    */
@@ -838,6 +848,8 @@ export type Mutation = {
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Delete one subscriber from _all_ existing stages. Returns deleted document. */
+  deleteSubscriber?: Maybe<Subscriber>;
   /** Delete one video from _all_ existing stages. Returns deleted document. */
   deleteVideo?: Maybe<Video>;
   /** Publish one asset */
@@ -850,20 +862,33 @@ export type Mutation = {
   /** Publish many Asset documents */
   publishManyAssetsConnection: AssetConnection;
   /**
+   * Publish many Subscriber documents
+   * @deprecated Please use the new paginated many mutation (publishManySubscribersConnection)
+   */
+  publishManySubscribers: BatchPayload;
+  /** Publish many Subscriber documents */
+  publishManySubscribersConnection: SubscriberConnection;
+  /**
    * Publish many Video documents
    * @deprecated Please use the new paginated many mutation (publishManyVideosConnection)
    */
   publishManyVideos: BatchPayload;
   /** Publish many Video documents */
   publishManyVideosConnection: VideoConnection;
+  /** Publish one subscriber */
+  publishSubscriber?: Maybe<Subscriber>;
   /** Publish one video */
   publishVideo?: Maybe<Video>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
+  /** Schedule to publish one subscriber */
+  schedulePublishSubscriber?: Maybe<Subscriber>;
   /** Schedule to publish one video */
   schedulePublishVideo?: Maybe<Video>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
+  /** Unpublish one subscriber from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishSubscriber?: Maybe<Subscriber>;
   /** Unpublish one video from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishVideo?: Maybe<Video>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -876,12 +901,21 @@ export type Mutation = {
   /** Find many Asset documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyAssetsConnection: AssetConnection;
   /**
+   * Unpublish many Subscriber documents
+   * @deprecated Please use the new paginated many mutation (unpublishManySubscribersConnection)
+   */
+  unpublishManySubscribers: BatchPayload;
+  /** Find many Subscriber documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManySubscribersConnection: SubscriberConnection;
+  /**
    * Unpublish many Video documents
    * @deprecated Please use the new paginated many mutation (unpublishManyVideosConnection)
    */
   unpublishManyVideos: BatchPayload;
   /** Find many Video documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyVideosConnection: VideoConnection;
+  /** Unpublish one subscriber from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishSubscriber?: Maybe<Subscriber>;
   /** Unpublish one video from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishVideo?: Maybe<Video>;
   /** Update one asset */
@@ -894,6 +928,13 @@ export type Mutation = {
   /** Update many Asset documents */
   updateManyAssetsConnection: AssetConnection;
   /**
+   * Update many subscribers
+   * @deprecated Please use the new paginated many mutation (updateManySubscribersConnection)
+   */
+  updateManySubscribers: BatchPayload;
+  /** Update many Subscriber documents */
+  updateManySubscribersConnection: SubscriberConnection;
+  /**
    * Update many videos
    * @deprecated Please use the new paginated many mutation (updateManyVideosConnection)
    */
@@ -902,10 +943,14 @@ export type Mutation = {
   updateManyVideosConnection: VideoConnection;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
+  /** Update one subscriber */
+  updateSubscriber?: Maybe<Subscriber>;
   /** Update one video */
   updateVideo?: Maybe<Video>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
+  /** Upsert one subscriber */
+  upsertSubscriber?: Maybe<Subscriber>;
   /** Upsert one video */
   upsertVideo?: Maybe<Video>;
 };
@@ -918,6 +963,11 @@ export type MutationCreateAssetArgs = {
 
 export type MutationCreateScheduledReleaseArgs = {
   data: ScheduledReleaseCreateInput;
+};
+
+
+export type MutationCreateSubscriberArgs = {
+  data: SubscriberCreateInput;
 };
 
 
@@ -946,6 +996,21 @@ export type MutationDeleteManyAssetsConnectionArgs = {
 };
 
 
+export type MutationDeleteManySubscribersArgs = {
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationDeleteManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationDeleteManyVideosArgs = {
   where?: InputMaybe<VideoManyWhereInput>;
 };
@@ -968,6 +1033,11 @@ export type MutationDeleteScheduledOperationArgs = {
 
 export type MutationDeleteScheduledReleaseArgs = {
   where: ScheduledReleaseWhereUniqueInput;
+};
+
+
+export type MutationDeleteSubscriberArgs = {
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -1009,6 +1079,24 @@ export type MutationPublishManyAssetsConnectionArgs = {
 };
 
 
+export type MutationPublishManySubscribersArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationPublishManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationPublishManyVideosArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<VideoManyWhereInput>;
@@ -1024,6 +1112,12 @@ export type MutationPublishManyVideosConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   to?: Array<Stage>;
   where?: InputMaybe<VideoManyWhereInput>;
+};
+
+
+export type MutationPublishSubscriberArgs = {
+  to?: Array<Stage>;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -1044,6 +1138,14 @@ export type MutationSchedulePublishAssetArgs = {
 };
 
 
+export type MutationSchedulePublishSubscriberArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: SubscriberWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishVideoArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -1059,6 +1161,14 @@ export type MutationScheduleUnpublishAssetArgs = {
   releaseId?: InputMaybe<Scalars['String']>;
   unpublishBase?: InputMaybe<Scalars['Boolean']>;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishSubscriberArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -1100,6 +1210,24 @@ export type MutationUnpublishManyAssetsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManySubscribersArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationUnpublishManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyVideosArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<VideoManyWhereInput>;
@@ -1115,6 +1243,12 @@ export type MutationUnpublishManyVideosConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: InputMaybe<Stage>;
   where?: InputMaybe<VideoManyWhereInput>;
+};
+
+
+export type MutationUnpublishSubscriberArgs = {
+  from?: Array<Stage>;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -1147,6 +1281,23 @@ export type MutationUpdateManyAssetsConnectionArgs = {
 };
 
 
+export type MutationUpdateManySubscribersArgs = {
+  data: SubscriberUpdateManyInput;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationUpdateManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: SubscriberUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationUpdateManyVideosArgs = {
   data: VideoUpdateManyInput;
   where?: InputMaybe<VideoManyWhereInput>;
@@ -1170,6 +1321,12 @@ export type MutationUpdateScheduledReleaseArgs = {
 };
 
 
+export type MutationUpdateSubscriberArgs = {
+  data: SubscriberUpdateInput;
+  where: SubscriberWhereUniqueInput;
+};
+
+
 export type MutationUpdateVideoArgs = {
   data: VideoUpdateInput;
   where: VideoWhereUniqueInput;
@@ -1179,6 +1336,12 @@ export type MutationUpdateVideoArgs = {
 export type MutationUpsertAssetArgs = {
   upsert: AssetUpsertInput;
   where: AssetWhereUniqueInput;
+};
+
+
+export type MutationUpsertSubscriberArgs = {
+  upsert: SubscriberUpsertInput;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -1241,6 +1404,14 @@ export type Query = {
   scheduledReleases: Array<ScheduledRelease>;
   /** Retrieve multiple scheduledReleases using the Relay connection interface */
   scheduledReleasesConnection: ScheduledReleaseConnection;
+  /** Retrieve a single subscriber */
+  subscriber?: Maybe<Subscriber>;
+  /** Retrieve document version */
+  subscriberVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple subscribers */
+  subscribers: Array<Subscriber>;
+  /** Retrieve multiple subscribers using the Relay connection interface */
+  subscribersConnection: SubscriberConnection;
   /** Retrieve a single user */
   user?: Maybe<User>;
   /** Retrieve multiple users */
@@ -1366,6 +1537,44 @@ export type QueryScheduledReleasesConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
   where?: InputMaybe<ScheduledReleaseWhereInput>;
+};
+
+
+export type QuerySubscriberArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: SubscriberWhereUniqueInput;
+};
+
+
+export type QuerySubscriberVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QuerySubscribersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<SubscriberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<SubscriberWhereInput>;
+};
+
+
+export type QuerySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<SubscriberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<SubscriberWhereInput>;
 };
 
 
@@ -1546,7 +1755,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Video;
+export type ScheduledOperationAffectedDocument = Asset | Subscriber | Video;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -2465,6 +2674,410 @@ export enum Stage {
   Published = 'PUBLISHED'
 }
 
+export type Subscriber = Node & {
+  __typename?: 'Subscriber';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Subscriber>;
+  email?: Maybe<Scalars['String']>;
+  /** List of Subscriber versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type SubscriberCreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type SubscriberDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type SubscriberHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type SubscriberPublishedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type SubscriberScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type SubscriberUpdatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type SubscriberConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: SubscriberWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type SubscriberConnection = {
+  __typename?: 'SubscriberConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<SubscriberEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type SubscriberCreateInput = {
+  cl7ckrg8p4hhd01ul2qoe0gym?: InputMaybe<VideoCreateManyInlineInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type SubscriberCreateManyInlineInput = {
+  /** Connect multiple existing Subscriber documents */
+  connect?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Create and connect multiple existing Subscriber documents */
+  create?: InputMaybe<Array<SubscriberCreateInput>>;
+};
+
+export type SubscriberCreateOneInlineInput = {
+  /** Connect one existing Subscriber document */
+  connect?: InputMaybe<SubscriberWhereUniqueInput>;
+  /** Create and connect one Subscriber document */
+  create?: InputMaybe<SubscriberCreateInput>;
+};
+
+/** An edge in a connection. */
+export type SubscriberEdge = {
+  __typename?: 'SubscriberEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Subscriber;
+};
+
+/** Identifies documents */
+export type SubscriberManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  email?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  email_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  email_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  email_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  email_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  email_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  email_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  email_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  email_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  email_starts_with?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum SubscriberOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  EmailAsc = 'email_ASC',
+  EmailDesc = 'email_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type SubscriberUpdateInput = {
+  cl7ckrg8p4hhd01ul2qoe0gym?: InputMaybe<VideoUpdateManyInlineInput>;
+  email?: InputMaybe<Scalars['String']>;
+};
+
+export type SubscriberUpdateManyInlineInput = {
+  /** Connect multiple existing Subscriber documents */
+  connect?: InputMaybe<Array<SubscriberConnectInput>>;
+  /** Create and connect multiple Subscriber documents */
+  create?: InputMaybe<Array<SubscriberCreateInput>>;
+  /** Delete multiple Subscriber documents */
+  delete?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Disconnect multiple Subscriber documents */
+  disconnect?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Subscriber documents */
+  set?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Update multiple Subscriber documents */
+  update?: InputMaybe<Array<SubscriberUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Subscriber documents */
+  upsert?: InputMaybe<Array<SubscriberUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type SubscriberUpdateManyInput = {
+  /** No fields in updateMany data input */
+  _?: InputMaybe<Scalars['String']>;
+};
+
+export type SubscriberUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: SubscriberUpdateManyInput;
+  /** Document search */
+  where: SubscriberWhereInput;
+};
+
+export type SubscriberUpdateOneInlineInput = {
+  /** Connect existing Subscriber document */
+  connect?: InputMaybe<SubscriberWhereUniqueInput>;
+  /** Create and connect one Subscriber document */
+  create?: InputMaybe<SubscriberCreateInput>;
+  /** Delete currently connected Subscriber document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Subscriber document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Subscriber document */
+  update?: InputMaybe<SubscriberUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Subscriber document */
+  upsert?: InputMaybe<SubscriberUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SubscriberUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: SubscriberUpdateInput;
+  /** Unique document search */
+  where: SubscriberWhereUniqueInput;
+};
+
+export type SubscriberUpsertInput = {
+  /** Create document if it didn't exist */
+  create: SubscriberCreateInput;
+  /** Update document if it exists */
+  update: SubscriberUpdateInput;
+};
+
+export type SubscriberUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: SubscriberUpsertInput;
+  /** Unique document search */
+  where: SubscriberWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type SubscriberWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  email?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  email_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  email_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  email_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  email_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  email_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  email_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  email_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  email_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  email_starts_with?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** References Subscriber record uniquely */
+export type SubscriberWhereUniqueInput = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
 export enum SystemDateTimeFieldVariation {
   Base = 'BASE',
   Combined = 'COMBINED',
@@ -2877,6 +3490,7 @@ export type Video = Node & {
   scheduledIn: Array<ScheduledOperation>;
   /** System stage field */
   stage: Stage;
+  subscriber?: Maybe<Subscriber>;
   thumbnail?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   /** The time the document was updated */
@@ -2922,6 +3536,11 @@ export type VideoScheduledInArgs = {
 };
 
 
+export type VideoSubscriberArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
 export type VideoUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
@@ -2946,6 +3565,7 @@ export type VideoConnection = {
 export type VideoCreateInput = {
   categoria?: InputMaybe<Categoria>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  subscriber?: InputMaybe<SubscriberCreateOneInlineInput>;
   thumbnail?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -3046,6 +3666,7 @@ export type VideoManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  subscriber?: InputMaybe<SubscriberWhereInput>;
   thumbnail?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   thumbnail_contains?: InputMaybe<Scalars['String']>;
@@ -3142,6 +3763,7 @@ export enum VideoOrderByInput {
 
 export type VideoUpdateInput = {
   categoria?: InputMaybe<Categoria>;
+  subscriber?: InputMaybe<SubscriberUpdateOneInlineInput>;
   thumbnail?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   videoId?: InputMaybe<Scalars['String']>;
@@ -3285,6 +3907,7 @@ export type VideoWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  subscriber?: InputMaybe<SubscriberWhereInput>;
   thumbnail?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   thumbnail_contains?: InputMaybe<Scalars['String']>;
@@ -3449,6 +4072,7 @@ export type AddVideoMutationVariables = Exact<{
   videoId: Scalars['String'];
   thumbnail: Scalars['String'];
   title: Scalars['String'];
+  id: Scalars['ID'];
 }>;
 
 
@@ -3461,6 +4085,20 @@ export type PublishMutationVariables = Exact<{
 
 export type PublishMutation = { __typename?: 'Mutation', publishVideo?: { __typename?: 'Video', id: string } | null };
 
+export type PublishSubscribeMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type PublishSubscribeMutation = { __typename?: 'Mutation', publishSubscriber?: { __typename?: 'Subscriber', id: string, email?: string | null } | null };
+
+export type SubscribeMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type SubscribeMutation = { __typename?: 'Mutation', createSubscriber?: { __typename?: 'Subscriber', id: string, email?: string | null } | null };
+
 export type GetByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -3470,21 +4108,29 @@ export type GetByIdQuery = { __typename?: 'Query', video?: { __typename?: 'Video
 
 export type GetVideoCategoriaQueryVariables = Exact<{
   categoria?: InputMaybe<Categoria>;
+  id: Scalars['ID'];
 }>;
 
 
-export type GetVideoCategoriaQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null, title?: string | null, thumbnail?: string | null }> };
+export type GetVideoCategoriaQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null, title?: string | null, thumbnail?: string | null, subscriber?: { __typename?: 'Subscriber', email?: string | null } | null }> };
 
-export type GetVideosQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetVideosQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
 
 
-export type GetVideosQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, videoId?: string | null, categoria?: Categoria | null }> };
+export type GetVideosQuery = { __typename?: 'Query', videos: Array<{ __typename?: 'Video', id: string, title?: string | null, thumbnail?: string | null, videoId?: string | null, categoria?: Categoria | null, subscriber?: { __typename?: 'Subscriber', email?: string | null } | null }> };
+
+export type ListSubscribeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListSubscribeQuery = { __typename?: 'Query', subscribers: Array<{ __typename?: 'Subscriber', email?: string | null, id: string }> };
 
 
 export const AddVideoDocument = gql`
-    mutation addVideo($categoria: Categoria!, $videoId: String!, $thumbnail: String!, $title: String!) {
+    mutation addVideo($categoria: Categoria!, $videoId: String!, $thumbnail: String!, $title: String!, $id: ID!) {
   createVideo(
-    data: {categoria: $categoria, videoId: $videoId, thumbnail: $thumbnail, title: $title}
+    data: {categoria: $categoria, subscriber: {connect: {id: $id}}, thumbnail: $thumbnail, title: $title, videoId: $videoId}
   ) {
     id
   }
@@ -3509,6 +4155,7 @@ export type AddVideoMutationFn = Apollo.MutationFunction<AddVideoMutation, AddVi
  *      videoId: // value for 'videoId'
  *      thumbnail: // value for 'thumbnail'
  *      title: // value for 'title'
+ *      id: // value for 'id'
  *   },
  * });
  */
@@ -3552,6 +4199,74 @@ export function usePublishMutation(baseOptions?: Apollo.MutationHookOptions<Publ
 export type PublishMutationHookResult = ReturnType<typeof usePublishMutation>;
 export type PublishMutationResult = Apollo.MutationResult<PublishMutation>;
 export type PublishMutationOptions = Apollo.BaseMutationOptions<PublishMutation, PublishMutationVariables>;
+export const PublishSubscribeDocument = gql`
+    mutation publishSubscribe($id: ID!) {
+  publishSubscriber(where: {id: $id}) {
+    id
+    email
+  }
+}
+    `;
+export type PublishSubscribeMutationFn = Apollo.MutationFunction<PublishSubscribeMutation, PublishSubscribeMutationVariables>;
+
+/**
+ * __usePublishSubscribeMutation__
+ *
+ * To run a mutation, you first call `usePublishSubscribeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePublishSubscribeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [publishSubscribeMutation, { data, loading, error }] = usePublishSubscribeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePublishSubscribeMutation(baseOptions?: Apollo.MutationHookOptions<PublishSubscribeMutation, PublishSubscribeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PublishSubscribeMutation, PublishSubscribeMutationVariables>(PublishSubscribeDocument, options);
+      }
+export type PublishSubscribeMutationHookResult = ReturnType<typeof usePublishSubscribeMutation>;
+export type PublishSubscribeMutationResult = Apollo.MutationResult<PublishSubscribeMutation>;
+export type PublishSubscribeMutationOptions = Apollo.BaseMutationOptions<PublishSubscribeMutation, PublishSubscribeMutationVariables>;
+export const SubscribeDocument = gql`
+    mutation subscribe($email: String!) {
+  createSubscriber(data: {email: $email}) {
+    id
+    email
+  }
+}
+    `;
+export type SubscribeMutationFn = Apollo.MutationFunction<SubscribeMutation, SubscribeMutationVariables>;
+
+/**
+ * __useSubscribeMutation__
+ *
+ * To run a mutation, you first call `useSubscribeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSubscribeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [subscribeMutation, { data, loading, error }] = useSubscribeMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useSubscribeMutation(baseOptions?: Apollo.MutationHookOptions<SubscribeMutation, SubscribeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SubscribeMutation, SubscribeMutationVariables>(SubscribeDocument, options);
+      }
+export type SubscribeMutationHookResult = ReturnType<typeof useSubscribeMutation>;
+export type SubscribeMutationResult = Apollo.MutationResult<SubscribeMutation>;
+export type SubscribeMutationOptions = Apollo.BaseMutationOptions<SubscribeMutation, SubscribeMutationVariables>;
 export const GetByIdDocument = gql`
     query GetById($id: ID!) {
   video(where: {id: $id}) {
@@ -3588,13 +4303,16 @@ export type GetByIdQueryHookResult = ReturnType<typeof useGetByIdQuery>;
 export type GetByIdLazyQueryHookResult = ReturnType<typeof useGetByIdLazyQuery>;
 export type GetByIdQueryResult = Apollo.QueryResult<GetByIdQuery, GetByIdQueryVariables>;
 export const GetVideoCategoriaDocument = gql`
-    query getVideoCategoria($categoria: Categoria) {
-  videos(where: {categoria: $categoria}) {
+    query getVideoCategoria($categoria: Categoria, $id: ID!) {
+  videos(where: {categoria: $categoria, subscriber: {id: $id}}) {
     id
     videoId
     categoria
     title
     thumbnail
+    subscriber {
+      email
+    }
   }
 }
     `;
@@ -3612,10 +4330,11 @@ export const GetVideoCategoriaDocument = gql`
  * const { data, loading, error } = useGetVideoCategoriaQuery({
  *   variables: {
  *      categoria: // value for 'categoria'
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useGetVideoCategoriaQuery(baseOptions?: Apollo.QueryHookOptions<GetVideoCategoriaQuery, GetVideoCategoriaQueryVariables>) {
+export function useGetVideoCategoriaQuery(baseOptions: Apollo.QueryHookOptions<GetVideoCategoriaQuery, GetVideoCategoriaQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetVideoCategoriaQuery, GetVideoCategoriaQueryVariables>(GetVideoCategoriaDocument, options);
       }
@@ -3627,11 +4346,16 @@ export type GetVideoCategoriaQueryHookResult = ReturnType<typeof useGetVideoCate
 export type GetVideoCategoriaLazyQueryHookResult = ReturnType<typeof useGetVideoCategoriaLazyQuery>;
 export type GetVideoCategoriaQueryResult = Apollo.QueryResult<GetVideoCategoriaQuery, GetVideoCategoriaQueryVariables>;
 export const GetVideosDocument = gql`
-    query GetVideos {
-  videos {
+    query GetVideos($email: String!) {
+  videos(where: {subscriber: {email: $email}}) {
     id
+    title
+    thumbnail
     videoId
     categoria
+    subscriber {
+      email
+    }
   }
 }
     `;
@@ -3648,10 +4372,11 @@ export const GetVideosDocument = gql`
  * @example
  * const { data, loading, error } = useGetVideosQuery({
  *   variables: {
+ *      email: // value for 'email'
  *   },
  * });
  */
-export function useGetVideosQuery(baseOptions?: Apollo.QueryHookOptions<GetVideosQuery, GetVideosQueryVariables>) {
+export function useGetVideosQuery(baseOptions: Apollo.QueryHookOptions<GetVideosQuery, GetVideosQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<GetVideosQuery, GetVideosQueryVariables>(GetVideosDocument, options);
       }
@@ -3662,3 +4387,38 @@ export function useGetVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type GetVideosQueryHookResult = ReturnType<typeof useGetVideosQuery>;
 export type GetVideosLazyQueryHookResult = ReturnType<typeof useGetVideosLazyQuery>;
 export type GetVideosQueryResult = Apollo.QueryResult<GetVideosQuery, GetVideosQueryVariables>;
+export const ListSubscribeDocument = gql`
+    query listSubscribe {
+  subscribers {
+    email
+    id
+  }
+}
+    `;
+
+/**
+ * __useListSubscribeQuery__
+ *
+ * To run a query within a React component, call `useListSubscribeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useListSubscribeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useListSubscribeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useListSubscribeQuery(baseOptions?: Apollo.QueryHookOptions<ListSubscribeQuery, ListSubscribeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ListSubscribeQuery, ListSubscribeQueryVariables>(ListSubscribeDocument, options);
+      }
+export function useListSubscribeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ListSubscribeQuery, ListSubscribeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ListSubscribeQuery, ListSubscribeQueryVariables>(ListSubscribeDocument, options);
+        }
+export type ListSubscribeQueryHookResult = ReturnType<typeof useListSubscribeQuery>;
+export type ListSubscribeLazyQueryHookResult = ReturnType<typeof useListSubscribeLazyQuery>;
+export type ListSubscribeQueryResult = Apollo.QueryResult<ListSubscribeQuery, ListSubscribeQueryVariables>;

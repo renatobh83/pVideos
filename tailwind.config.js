@@ -6,6 +6,7 @@ module.exports = {
         video: "9fr 2fr",
       },
       screens: {
+        1100: "1100px",
         800: "800px",
         400: "400px",
       },

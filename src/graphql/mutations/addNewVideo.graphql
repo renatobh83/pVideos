@@ -3,13 +3,15 @@ mutation addVideo(
   $videoId: String!
   $thumbnail: String!
   $title: String!
+  $id: ID!
 ) {
   createVideo(
     data: {
       categoria: $categoria
-      videoId: $videoId
+      subscriber: { connect: { id: $id } }
       thumbnail: $thumbnail
       title: $title
+      videoId: $videoId
     }
   ) {
     id

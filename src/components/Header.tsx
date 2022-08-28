@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 import Logo from "./Logo";
 import {
@@ -13,17 +13,26 @@ export function Header() {
   const selectRef = useRef<HTMLSelectElement>(null);
   const [newVideo, setNewVideo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userId] = useState(() => {
+    if (localStorage.getItem("user")) {
+      return localStorage.getItem("user");
+    } else {
+      return null;
+    }
+  });
 
   const [createVideo] = useAddVideoMutation();
   const [publishVideo] = usePublishMutation();
+
   const handleNewVideo = () => {
     setNewVideo(!newVideo);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     const link = linkRef.current.value;
+
     if (link.indexOf("youtube") === -1) {
       alert("Link invalido");
       return;
@@ -50,6 +59,7 @@ export function Header() {
         videoId: videoId,
         thumbnail: thumbnail_url,
         title: title,
+        id: userId,
       },
     });
 
@@ -110,14 +120,19 @@ export function Header() {
         <div className="col-start-2 flex justify-center">
           <Logo />
         </div>
-        <button className="place-self-end pr-3 flex items-center">
-          <span
-            className="material-symbols-outlined"
-            onClick={() => handleNewVideo()}
-          >
-            add
-          </span>
-        </button>
+        <div className="place-self-end flex">
+          <button className="pr-3 flex items-center">
+            <span
+              className="material-symbols-outlined"
+              onClick={() => handleNewVideo()}
+            >
+              add
+            </span>
+          </button>
+          <button className="place-self-end pr-3 flex items-center">
+            <a href="/">Sair</a>
+          </button>
+        </div>
       </div>
       {newVideo && <ModalInput />}
     </>

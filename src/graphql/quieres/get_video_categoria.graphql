@@ -1,9 +1,12 @@
-query getVideoCategoria($categoria: Categoria) {
-  videos(where: { categoria: $categoria }) {
+query getVideoCategoria($categoria: Categoria, $id: ID!) {
+  videos(where: { categoria: $categoria, subscriber: { id: $id } }) {
     id
     videoId
     categoria
     title
     thumbnail
+    subscriber {
+      email
+    }
   }
 }

@@ -1,15 +1,23 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useGetVideoCategoriaQuery } from "../graphql/types";
 
 export function Sidebar() {
   const { slug } = useParams<{ slug: string }>();
-  const [cat, setCat] = useState();
 
+  const [cat, setCat] = useState();
+  const [userId] = useState(() => {
+    if (localStorage.getItem("user")) {
+      return localStorage.getItem("user");
+    } else {
+      return null;
+    }
+  });
   const { data } = useGetVideoCategoriaQuery({
     variables: {
       categoria: cat,
+      id: userId ? userId : "0",
     },
   });
 

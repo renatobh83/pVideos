@@ -1,7 +1,12 @@
-query GetVideos {
-  videos {
+query GetVideos($email: String!) {
+  videos(where: { subscriber: { email: $email } }) {
     id
+    title
+    thumbnail
     videoId
     categoria
+    subscriber {
+      email
+    }
   }
 }
