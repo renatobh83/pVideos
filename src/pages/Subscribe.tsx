@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../components/Logo";
+
 import {
   usePublishSubscribeMutation,
   useSubscribeMutation,
@@ -8,7 +8,6 @@ import {
 } from "../graphql/types";
 
 export function Subscribe() {
-  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const [createSubscriber, { loading }] = useSubscribeMutation();
@@ -19,11 +18,11 @@ export function Subscribe() {
   async function handleOnSubmit(event: FormEvent) {
     event?.preventDefault();
 
-    const userExist = users.subscribers.filter((user) => user.email === email);
-
     if (!email) {
       return;
     }
+    const userExist = users.subscribers.filter((user) => user.email === email);
+
     if (!userExist.length) {
       const { data } = await createSubscriber({
         variables: {
@@ -41,6 +40,9 @@ export function Subscribe() {
       localStorage.setItem("user", userExist[0].id);
       navigate("/video");
     }
+  }
+  if (localStorage.getItem("user")) {
+    return navigate("/video");
   }
   return (
     <div className="min-h-screen flex flex-col items-center text-g1 p-2">

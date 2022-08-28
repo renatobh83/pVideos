@@ -1,5 +1,6 @@
 query GetById($id: ID!) {
   video(where: { id: $id }) {
     videoId
+    title
   }
 }

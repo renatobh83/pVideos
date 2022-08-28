@@ -4104,7 +4104,7 @@ export type GetByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetByIdQuery = { __typename?: 'Query', video?: { __typename?: 'Video', videoId?: string | null } | null };
+export type GetByIdQuery = { __typename?: 'Query', video?: { __typename?: 'Video', videoId?: string | null, title?: string | null } | null };
 
 export type GetVideoCategoriaQueryVariables = Exact<{
   categoria?: InputMaybe<Categoria>;
@@ -4271,6 +4271,7 @@ export const GetByIdDocument = gql`
     query GetById($id: ID!) {
   video(where: {id: $id}) {
     videoId
+    title
   }
 }
     `;
