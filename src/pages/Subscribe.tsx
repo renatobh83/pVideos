@@ -50,8 +50,8 @@ export function Subscribe() {
         <div className="1100:max-w-[640px] max-w-[300px] ">
           <h1 className="mt-8 text-[2.5rem] leading-tight">
             Construa uma <strong className="text-blue-500">playlist</strong> ,
-            do youtube, com
-            <strong className="text-blue-500"> duas categorias</strong>
+            do youtube, apenas com o
+            <strong className="text-blue-500"> link do video</strong>
           </h1>
           <p className="mt-4 text-gray-200 leading-relaxed">
             Esta é uma aplicacao desenvolvida para voce criar uma lista de

@@ -77,14 +77,14 @@ export function Header() {
 
   const ModalInput = () => {
     return (
-      <div className="inset-0 bg-black absolute text-white opacity-80 max-w-[1160px] mx-auto z-[1000]">
-        <div className="p-10 flex flex-col gap-3 w-full mx-auto bg-black">
+      <div className="inset-0 bg-black opacity-80 absolute text-white max-w-[1160px] mx-auto z-[1000]">
+        <div className="p-10 flex flex-col gap-3 w-full mx-auto">
           <button onClick={() => handleNewVideo()} className="text-end">
             Close
           </button>
 
           <form
-            className="flex flex-col justify-center items-center gap-4 text-g9"
+            className="flex flex-col justify-center items-center gap-4 text-g9 "
             onSubmit={handleSubmit}
           >
             <select name="categoria" id="categoria" required ref={selectRef}>
@@ -123,20 +123,18 @@ export function Header() {
         <div className="col-start-2 flex justify-center">
           <Logo />
         </div>
-        <div className="place-self-end flex">
-          <button className="pr-3 flex items-center">
-            <span
-              className="material-symbols-outlined"
-              onClick={() => handleNewVideo()}
-            >
-              add
-            </span>
-          </button>
-          <button
-            onClick={handleLogout}
-            className="place-self-end pr-3 flex items-center"
+        <div className="place-self-end flex gap-5 items-center">
+          <span
+            className="material-symbols-outlined cursor-pointer px-1 py-2"
+            onClick={() => handleNewVideo()}
           >
-            <a href="/">Sair</a>
+            add
+          </span>
+
+          <button onClick={handleLogout} className="pr-5 pt-2">
+            <a href="/">
+              <span className="material-symbols-outlined">logout</span>
+            </a>
           </button>
         </div>
       </div>
