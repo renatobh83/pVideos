@@ -1,4 +1,23 @@
-import { DefaultUi, Player, Youtube } from "@vime/react";
+import {
+  ClickToPlay,
+  Control,
+  Controls,
+  ControlSpacer,
+  DefaultSettings,
+  DefaultUi,
+  FullscreenControl,
+  PipControl,
+  PlaybackControl,
+  Player,
+  Poster,
+  Settings,
+  SettingsControl,
+  TimeProgress,
+  Tooltip,
+  Ui,
+  VolumeControl,
+  Youtube,
+} from "@vime/react";
 import { useGetByIdQuery } from "../graphql/types";
 import "@vime/core/themes/default.css";
 import { useParams } from "react-router-dom";
@@ -28,9 +47,10 @@ export function Video() {
       <div className="bg-g9 flex justify-center ">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           <Player
-            // loop={isLoop}
             ref={player}
-            onVmFullscreenChange={() => {}}
+            onVmPlay={() => {
+              player.current.enterFullscreen();
+            }}
           >
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
