@@ -77,10 +77,10 @@ export function Header() {
 
   const ModalInput = () => {
     return (
-      <div className="inset-0 bg-black opacity-80 absolute text-white max-w-[1160px] mx-auto z-[1000]">
+      <div className="inset-0 bg-black opacity-[85%] absolute text-white max-w-[1160px] mx-auto z-[1000]">
         <div className="p-10 flex flex-col gap-3 w-full mx-auto">
           <button onClick={() => handleNewVideo()} className="text-end">
-            Close
+            Fechar
           </button>
 
           <form
@@ -96,13 +96,13 @@ export function Header() {
             <input
               ref={linkRef}
               type="text"
-              className="px-2 py-1 rounded"
+              className="p-2 rounded"
               placeholder="Inserir link aqui"
             />
             <button
               type="submit"
               className={classNames(
-                "py-2 px-4 rounded uppercase tracking-wide text-g9 bg-white",
+                "py-2 px-4 rounded uppercase tracking-wide text-g9 bg-g1 hover:bg-g9 hover:text-g1",
                 {
                   "opacity-10 cursor-not-allowed": isLoading,
                 }

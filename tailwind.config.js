@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         video: "9fr 2fr",
+        sidebar: "1fr max-content",
       },
       screens: {
         1100: "1100px",

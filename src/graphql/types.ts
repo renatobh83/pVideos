@@ -4078,6 +4078,13 @@ export type AddVideoMutationVariables = Exact<{
 
 export type AddVideoMutation = { __typename?: 'Mutation', createVideo?: { __typename?: 'Video', id: string } | null };
 
+export type Delete_By_IdMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Delete_By_IdMutation = { __typename?: 'Mutation', deleteVideo?: { __typename?: 'Video', id: string, videoId?: string | null, updatedAt: any, title?: string | null, thumbnail?: string | null } | null, unpublishVideo?: { __typename?: 'Video', id: string } | null };
+
 export type PublishMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -4166,6 +4173,46 @@ export function useAddVideoMutation(baseOptions?: Apollo.MutationHookOptions<Add
 export type AddVideoMutationHookResult = ReturnType<typeof useAddVideoMutation>;
 export type AddVideoMutationResult = Apollo.MutationResult<AddVideoMutation>;
 export type AddVideoMutationOptions = Apollo.BaseMutationOptions<AddVideoMutation, AddVideoMutationVariables>;
+export const Delete_By_IdDocument = gql`
+    mutation delete_by_id($id: ID!) {
+  deleteVideo(where: {id: $id}) {
+    id
+    videoId
+    updatedAt
+    title
+    thumbnail
+  }
+  unpublishVideo(where: {id: $id}) {
+    id
+  }
+}
+    `;
+export type Delete_By_IdMutationFn = Apollo.MutationFunction<Delete_By_IdMutation, Delete_By_IdMutationVariables>;
+
+/**
+ * __useDelete_By_IdMutation__
+ *
+ * To run a mutation, you first call `useDelete_By_IdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDelete_By_IdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteByIdMutation, { data, loading, error }] = useDelete_By_IdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDelete_By_IdMutation(baseOptions?: Apollo.MutationHookOptions<Delete_By_IdMutation, Delete_By_IdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Delete_By_IdMutation, Delete_By_IdMutationVariables>(Delete_By_IdDocument, options);
+      }
+export type Delete_By_IdMutationHookResult = ReturnType<typeof useDelete_By_IdMutation>;
+export type Delete_By_IdMutationResult = Apollo.MutationResult<Delete_By_IdMutation>;
+export type Delete_By_IdMutationOptions = Apollo.BaseMutationOptions<Delete_By_IdMutation, Delete_By_IdMutationVariables>;
 export const PublishDocument = gql`
     mutation publish($id: ID!) {
   publishVideo(where: {id: $id}) {

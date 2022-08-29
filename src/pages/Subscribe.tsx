@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -41,21 +41,25 @@ export function Subscribe() {
       navigate("/video");
     }
   }
-  if (localStorage.getItem("user")) {
-    return navigate("/video");
-  }
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      return navigate("/video");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col items-center text-g1 p-2">
       <div className="w-full max-w-[1100px] flex justify-between  1100:flex-row flex-col-reverse items-center mt-20 mx-auto">
         <div className="1100:max-w-[640px] max-w-[300px] ">
           <h1 className="mt-8 text-[2.5rem] leading-tight">
             Construa uma <strong className="text-blue-500">playlist</strong> ,
-            do youtube, apenas com o
+            do YouTube, apenas com o
             <strong className="text-blue-500"> link do video</strong>
           </h1>
           <p className="mt-4 text-gray-200 leading-relaxed">
-            Esta é uma aplicacao desenvolvida para voce criar uma lista de
-            videos preferidos do youtube livre de Ad's
+            Esta é uma aplicação desenvolvida para voce criar uma lista de
+            videos preferidos do YouTube livre de Ad's
           </p>
         </div>
         <div className="p-8 bg-gray-700 border border-gray-500 rounded">
