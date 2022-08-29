@@ -32,7 +32,7 @@ export function Video() {
     <div className="800:flex-1 overflow-y-auto">
       <div className="bg-g9 flex justify-center ">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
-          <Player loop={isLoop}>
+          <Player loop={isLoop} autoplay>
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
             <Ui>
