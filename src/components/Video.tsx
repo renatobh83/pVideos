@@ -45,7 +45,7 @@ export function Video() {
   return (
     <div className="800:flex-1 overflow-y-auto">
       <div className="bg-g9 flex justify-center ">
-        <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
+        <div className="h-full w-full max-w-[1000px] max-h-[60vh] ">
           <Player
             ref={player}
             onVmPlay={() => {
