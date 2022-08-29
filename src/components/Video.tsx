@@ -1,5 +1,10 @@
 import {
+  CaptionControl,
+  Captions,
   ClickToPlay,
+  Controls,
+  DblClickFullscreen,
+  DefaultControls,
   DefaultUi,
   Player,
   Spinner,
@@ -15,6 +20,8 @@ import classNames from "classnames";
 export function Video() {
   const { slug } = useParams<{ slug: string }>();
   const [isLoop, setIsLoop] = useState(false);
+
+  const player = useRef<HTMLVmPlayerElement>(null);
   const loop = useRef<HTMLInputElement>(null);
 
   const { data } = useGetByIdQuery({
@@ -22,6 +29,9 @@ export function Video() {
       id: slug,
     },
   });
+  const enterFullscreen = async () => {
+    player.current.pause();
+  };
   const setLoop = () => {
     setIsLoop(loop.current.checked);
   };
@@ -32,13 +42,13 @@ export function Video() {
     <div className="800:flex-1 overflow-y-auto">
       <div className="bg-g9 flex justify-center ">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
-          <Player loop={isLoop}>
+          <Player
+            loop={isLoop}
+            ref={player}
+            onVmFullscreenChange={enterFullscreen}
+          >
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
-            <Ui>
-              <ClickToPlay useOnMobile={true} />
-              <Spinner />
-            </Ui>
           </Player>
         </div>
       </div>
