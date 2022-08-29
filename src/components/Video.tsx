@@ -14,9 +14,9 @@ import classNames from "classnames";
 
 export function Video() {
   const { slug } = useParams<{ slug: string }>();
-  const [isLoop, setIsLoop] = useState(true);
+  const [isLoop, setIsLoop] = useState(false);
   const loop = useRef<HTMLInputElement>(null);
-  const [play, setPlay] = useState(false);
+
   const { data } = useGetByIdQuery({
     variables: {
       id: slug,
@@ -32,19 +32,7 @@ export function Video() {
     <div className="800:flex-1 overflow-y-auto">
       <div className="bg-g9 flex justify-center ">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
-          <Player
-            controls={false}
-            // loop={isLoop}
-            autoplay={play}
-            onVmPlay={() => setPlay(false)}
-            onVmCurrentTimeChange={(e) => {
-              // console.log(e);
-            }}
-            onVmFullscreenChange={(e) => console.log(e)}
-            onVmPlaybackEnded={(e) => {
-              setPlay(true);
-            }}
-          >
+          <Player loop={isLoop}>
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
             <Ui>
@@ -56,7 +44,7 @@ export function Video() {
       </div>
       <div className="py-4 px-2">
         <p className="text-zinc-50">{data.video.title}</p>
-        {/* <label htmlFor="loop">
+        <label htmlFor="loop" className="hidden sm:block">
           <input
             className="hidden absolute pointer-events-none"
             type="checkbox"
@@ -73,7 +61,7 @@ export function Video() {
           >
             Loop
           </span>
-        </label> */}
+        </label>
       </div>
     </div>
   );
