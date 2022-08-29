@@ -1,16 +1,4 @@
-import {
-  CaptionControl,
-  Captions,
-  ClickToPlay,
-  Controls,
-  DblClickFullscreen,
-  DefaultControls,
-  DefaultUi,
-  Player,
-  Spinner,
-  Ui,
-  Youtube,
-} from "@vime/react";
+import { DefaultUi, Player, Youtube } from "@vime/react";
 import { useGetByIdQuery } from "../graphql/types";
 import "@vime/core/themes/default.css";
 import { useParams } from "react-router-dom";
@@ -29,12 +17,9 @@ export function Video() {
       id: slug,
     },
   });
-  const enterFullscreen = async () => {
-    player.current.pause();
-  };
-  const setLoop = () => {
-    setIsLoop(loop.current.checked);
-  };
+  // const setLoop = () => {
+  //   setIsLoop(loop.current.checked);
+  // };
   if (!data) {
     return <div></div>;
   }
@@ -43,9 +28,9 @@ export function Video() {
       <div className="bg-g9 flex justify-center ">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           <Player
-            loop={isLoop}
+            // loop={isLoop}
             ref={player}
-            onVmFullscreenChange={enterFullscreen}
+            onVmFullscreenChange={() => {}}
           >
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
@@ -54,7 +39,7 @@ export function Video() {
       </div>
       <div className="py-4 px-2">
         <p className="text-zinc-50">{data.video.title}</p>
-        <label htmlFor="loop" className="hidden sm:block">
+        {/* <label htmlFor="loop" className="hidden sm:block">
           <input
             className="hidden absolute pointer-events-none"
             type="checkbox"
@@ -71,7 +56,7 @@ export function Video() {
           >
             Loop
           </span>
-        </label>
+        </label> */}
       </div>
     </div>
   );
