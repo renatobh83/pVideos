@@ -20,19 +20,18 @@ export function Sidebar() {
       return "0";
     }
   });
+  const fetchData = async () => {
+    const { data } = await get({
+      variables: {
+        id: userId,
+        categoria: cat,
+      },
+    });
+    setVideos(data.videos);
+  };
 
   useEffect(() => {
-    const fetch = async () => {
-      const { data } = await get({
-        variables: {
-          id: userId,
-          categoria: cat,
-        },
-      });
-      setVideos(data.videos);
-    };
-
-    if (cat) fetch();
+    if (cat) fetchData();
   }, [cat]);
 
   const handleRemoveVideo = async (id: string) => {

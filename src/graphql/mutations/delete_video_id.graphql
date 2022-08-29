@@ -1,10 +1,6 @@
 mutation delete_by_id($id: ID!) {
   deleteVideo(where: { id: $id }) {
     id
-    videoId
-    updatedAt
-    title
-    thumbnail
   }
   unpublishVideo(where: { id: $id }) {
     id
