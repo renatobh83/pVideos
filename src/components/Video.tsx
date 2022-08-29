@@ -1,4 +1,11 @@
-import { DefaultUi, Player, Youtube } from "@vime/react";
+import {
+  ClickToPlay,
+  DefaultUi,
+  Player,
+  Spinner,
+  Ui,
+  Youtube,
+} from "@vime/react";
 import { useGetByIdQuery } from "../graphql/types";
 import "@vime/core/themes/default.css";
 import { useParams } from "react-router-dom";
@@ -28,6 +35,10 @@ export function Video() {
           <Player loop={isLoop}>
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
+            <Ui>
+              <ClickToPlay useOnMobile={true} />
+              <Spinner />
+            </Ui>
           </Player>
         </div>
       </div>
