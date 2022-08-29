@@ -16,7 +16,7 @@ export function Video() {
   const { slug } = useParams<{ slug: string }>();
   const [isLoop, setIsLoop] = useState(true);
   const loop = useRef<HTMLInputElement>(null);
-
+  const [play, setPlay] = useState(false);
   const { data } = useGetByIdQuery({
     variables: {
       id: slug,
@@ -35,13 +35,14 @@ export function Video() {
           <Player
             controls={false}
             // loop={isLoop}
-
+            autoplay={play}
+            onVmPlay={() => setPlay(false)}
             onVmCurrentTimeChange={(e) => {
               // console.log(e);
             }}
             onVmFullscreenChange={(e) => console.log(e)}
             onVmPlaybackEnded={(e) => {
-              console.log(e);
+              setPlay(true);
             }}
           >
             <Youtube videoId={data.video.videoId} />
@@ -55,7 +56,7 @@ export function Video() {
       </div>
       <div className="py-4 px-2">
         <p className="text-zinc-50">{data.video.title}</p>
-        <label htmlFor="loop">
+        {/* <label htmlFor="loop">
           <input
             className="hidden absolute pointer-events-none"
             type="checkbox"
@@ -72,7 +73,7 @@ export function Video() {
           >
             Loop
           </span>
-        </label>
+        </label> */}
       </div>
     </div>
   );
