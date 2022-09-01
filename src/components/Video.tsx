@@ -15,7 +15,7 @@ export function Video() {
   });
 
   if (!data) {
-    return <div></div>;
+    return <div className="flex-1 h-[40vh] text-g1 mx-auto">Carregando...</div>;
   }
   return (
     <div className="800:flex-1 overflow-y-auto">
