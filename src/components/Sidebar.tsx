@@ -9,17 +9,21 @@ import {
 export function Sidebar() {
   const { slug } = useParams<{ slug: string }>();
   const [deleteById] = useDelete_By_IdMutation();
+  
   const [videosData, setVideos] = useState([]);
   const [get] = useGetVideoCategoriaLazyQuery();
   const [cat, setCat] = useState();
 
   const [userId] = useState(() => {
+    
     if (localStorage.getItem("user")) {
       return localStorage.getItem("user");
     } else {
-      return "0";
+      return '0';
     }
   });
+
+
   const fetchData = async () => {
     const { data } = await get({
       variables: {

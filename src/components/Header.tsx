@@ -13,6 +13,7 @@ export function Header() {
   const selectRef = useRef<HTMLSelectElement>(null);
   const [newVideo, setNewVideo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
   const [userId] = useState(() => {
     if (localStorage.getItem("user")) {
       return localStorage.getItem("user");
@@ -20,6 +21,7 @@ export function Header() {
       return null;
     }
   });
+
 
   const [createVideo] = useAddVideoMutation();
   const [publishVideo] = usePublishMutation();
@@ -77,7 +79,7 @@ export function Header() {
 
   const ModalInput = () => {
     return (
-      <div className="inset-0 bg-black opacity-[85%] absolute text-white max-w-[1160px] mx-auto z-[1000]">
+      <div className="inset-0 bg-black opacity-[89%] absolute text-white max-w-[1160px] mx-auto z-[1000]">
         <div className="p-10 flex flex-col gap-3 w-full mx-auto">
           <button onClick={() => handleNewVideo()} className="text-end">
             Fechar

@@ -1,3 +1,4 @@
 node_modules/
 .env
 codegen.yml
+.DS_STORE
