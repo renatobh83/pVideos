@@ -17,9 +17,9 @@ export function Video() {
     return <div className="flex-1 h-[40vh] text-g1 mx-auto">Carregando...</div>;
   }
   return (
-    <div className="800:flex-1 overflow-y-auto">
+    <div className="800:flex-1 overflow-y-auto  sticky top-0">
       <div className="bg-g9 flex justify-center ">
-        <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video sticky top-0">
+        <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
           <Player controls={false} >
             <Youtube videoId={data.video.videoId} />
             <DefaultUi />
