@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams ,useNavigate} from "react-router-dom";
 import classNames from "classnames";
 import {
   useDelete_By_IdMutation,
@@ -9,7 +9,7 @@ import {
 export function Sidebar() {
   const { slug } = useParams<{ slug: string }>();
   const [deleteById] = useDelete_By_IdMutation();
-  
+  const navigate = useNavigate()
   const [videosData, setVideos] = useState([]);
   const [get] = useGetVideoCategoriaLazyQuery();
   const [cat, setCat] = useState();
@@ -22,7 +22,6 @@ export function Sidebar() {
       return '0';
     }
   });
-
 
   const fetchData = async () => {
     const { data } = await get({
@@ -52,6 +51,7 @@ export function Sidebar() {
     });
 
     setVideos(data.videos);
+    navigate("/")
   };
 
   const handleChooseList = (cat: any) => {

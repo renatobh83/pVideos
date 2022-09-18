@@ -20,15 +20,14 @@ export function Video() {
     <div className="800:flex-1 overflow-y-auto  sticky top-0">
       <div className="bg-g9 flex justify-center ">
         <div className="h-full w-full max-w-[1000px] max-h-[60vh] aspect-video">
-          <Player controls={false} >
-            <Youtube videoId={data.video.videoId} />
+          <Player controls={false} autoplay={true}>
+            <Youtube videoId={data.video.videoId}  />
             <DefaultUi />
           </Player>
         </div>
       </div>
       <div className="py-4 px-2">
         <p className="text-zinc-50">{data.video.title}</p>
-      
       </div>
     </div>
   );
